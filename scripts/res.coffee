@@ -4,7 +4,7 @@ module.exports = (robot) ->
   robot.hear /(乾杯|:beer(s)?:)/g, (msg) ->
     msg.send ":tea:"
   robot.hear /zawa/i, (msg) ->
-    msg.send　msg.random [
+    msg.send msg.random [
       "https://sugoi-ninja.slack.com/files/noir_neo/F06A4TRE0/the_hashiru_zawa.gif",
       "https://sugoi-ninja.slack.com/files/maku693/F06KMN64R/zawa.gif",
     ]
