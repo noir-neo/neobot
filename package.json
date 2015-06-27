@@ -1,6 +1,6 @@
 {
   "name": "neobot",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "author": "neo <noir.neo.04@gmail.com>",
   "description": "Interactive Interface System produced by neoneo",
@@ -11,7 +11,6 @@
     "hubot-google-images": "^0.1.4",
     "hubot-google-translate": "^0.1.0",
     "hubot-help": "^0.1.1",
-    "hubot-heroku-keepalive": "0.0.4",
     "hubot-maps": "0.0.2",
     "hubot-pugme": "^0.1.0",
     "hubot-redis-brain": "0.0.2",
