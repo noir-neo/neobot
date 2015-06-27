@@ -18,16 +18,11 @@ module.exports = (robot) ->
               msg.reply "わたしのソースコードが更新されました:\n" + output
 
               try
-                msg.reply "npm update..."
-                child_process.exec 'npm update', (error, stdout, stderr) ->
+                msg.reply "npm install..."
+                child_process.exec 'npm install', (error, stdout, stderr) ->
                   if error
-                    msg.reply "npm update failed: " + stderr
+                    msg.reply "npm install failed: " + stderr
                   else
-                    output = stdout+''
-                    if /node_modules/.test output
-                      msg.reply "some dependencies updated:\n" + output
-                    else
-                      msg.reply "all dependencies are up-to-date"
                     msg.reply "再起動してきますね。"
                     process.exit()
               catch error
