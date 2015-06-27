@@ -10,7 +10,7 @@ module.exports = (robot) ->
       "https://sugoi-ninja.slack.com/files/maku693/F06KMN64R/zawa.gif",
     ]
   robot.hear /おはよう/g, (msg) ->
-    if msg.envelope?.user?.name === papa_name
+    if msg.envelope?.user?.name == papa_name
       msg.send "おはよう、パパ。気分はどうかしら？"
     else
       msg.send "おはようございます。"
