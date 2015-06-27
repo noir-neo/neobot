@@ -5,8 +5,7 @@ permitted_users = ["noir_neo"]
 module.exports = (robot) ->
 
   robot.respond /update/i, (msg) ->
-    console.log msg.envelope?.user?.name 
-    if user = msg.envelope?.user?.name in permitted_users
+    if msg.envelope?.user?.name in permitted_users
 
       try
         msg.reply "git pull..."
@@ -16,7 +15,7 @@ module.exports = (robot) ->
           else
             output = stdout+''
             if not /Already up\-to\-date/.test output
-              msg.reply "わたしのソースコードが変更されました:\n" + output
+              msg.reply "わたしのソースコードが更新されました:\n" + output
 
               try
                 msg.reply "npm update..."
@@ -29,15 +28,15 @@ module.exports = (robot) ->
                       msg.reply "some dependencies updated:\n" + output
                     else
                       msg.reply "all dependencies are up-to-date"
-                    msg.reply "再起動します。"
+                    msg.reply "再起動してきますね。"
                     process.exit()
               catch error
                 msg.reply "npm update failed: " + error
 
             else
-              msg.reply "わたしのソースコードは最新です。"
+              msg.reply "わたしは最新の状態です。パパ、次のアップデートはまだかしら？"
       catch error
         msg.reply "git pull failed: " + error
     
     else
-      msg.reply "アクセス権限がありません。"
+      msg.reply "エラー、アクセス権限がありません。"
