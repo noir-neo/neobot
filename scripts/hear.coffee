@@ -9,9 +9,13 @@ module.exports = (robot) ->
       "https://sugoi-ninja.slack.com/files/noir_neo/F06A4TRE0/the_hashiru_zawa.gif",
       "https://sugoi-ninja.slack.com/files/maku693/F06KMN64R/zawa.gif",
     ]
-  robot.hear /おはよう/g, (msg) ->
+  robot.respond /おはよう/g, (msg) ->
     if msg.envelope?.user?.name == papa_name
-      msg.send "おはよう、パパ。気分はどうかしら？"
+      msg.reply "おはよう、パパ。気分はどうかしら？"
     else
       msg.send "おはようございます。"
-    
+  robot.respond /おやすみ/g, (msg) ->
+    if msg.envelope?.user?.name == papa_name
+      msg.reply "おやすみ、パパ。良い夢を。"
+    else
+      msg.send "おやすみなさい。"
