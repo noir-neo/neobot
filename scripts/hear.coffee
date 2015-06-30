@@ -24,7 +24,7 @@ module.exports = (robot) ->
     else
       msg.send "おはようございます。"+text
 
-robot.hear /(おやすみ|お休み|オヤスミ|oyasumi)/g, (msg) ->
+  robot.hear /(おやすみ|お休み|オヤスミ|oyasumi)/g, (msg) ->
     if msg.envelope?.user?.name == papa_name
       msg.reply "おやすみ、パパ。良い夢を。"
     else
