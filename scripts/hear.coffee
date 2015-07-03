@@ -31,6 +31,8 @@ module.exports = (robot) ->
       msg.send "おやすみなさい。"
 
   robot.hear /はぴば|誕生日おめでとう/g, (msg) ->
+    if envelope?.user?.name != papa_name
+      return
     d = new Date
     month = d.getMonth() + 1
     date  = d.getDate()
