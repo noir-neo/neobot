@@ -29,3 +29,36 @@ module.exports = (robot) ->
       msg.reply "おやすみ、パパ。良い夢を。"
     else
       msg.send "おやすみなさい。"
+
+  robot.hear /はぴば|誕生日おめでとう/g, (msg) ->
+    d = new Date
+    month = d.getMonth() + 1
+    date  = d.getDate()
+    you = ""
+    message = ""
+    if month == 7 && date == 3
+      you = "ざわ"
+      message = "貴方にとって、良き1年となりますように。再び、共に戦いましょう！"
+    if you
+      sing = (i) ->
+        text = " :notes: Happy birthday"
+        wait_time = 5000
+        switch i
+          when 0
+            msg.send "コホン……"
+            wait_time = 3000
+          when 1,2
+            msg.send text + " to you,"
+            wait_time = 4500
+          when 3
+            msg.send text + ", dear " + you
+            wait_time = 6000
+          when 4
+            msg.send text + " to you!"
+          when 5
+            msg.send "お誕生日おめでとう、" + you + "。 :birthday: " + message
+            return
+        setTimeout () ->
+          sing ++i
+        , wait_time
+      sing 0
