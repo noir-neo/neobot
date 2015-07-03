@@ -43,7 +43,7 @@ module.exports = (robot) ->
       message = "貴方にとって、良き1年となりますように。再び、共に戦いましょう！"
     if you
       sing = (i) ->
-        text = " :notes: Happy birthday"
+        text = ":notes: Happy birthday"
         wait_time = 5000
         switch i
           when 0
