@@ -1,3 +1,5 @@
+'use strict'
+
 module.exports = (robot) ->
   robot.respond /(tabi|たび)/i, (msg) ->
     robot.http("https://api.vineapp.com/timelines/users/1038468495395958784")

@@ -1,3 +1,5 @@
+'use strict'
+
 child_process = require 'child_process'
 
 permitted_users = ["noir_neo"]
