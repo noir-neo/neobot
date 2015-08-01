@@ -2,12 +2,14 @@
 
 child_process = require 'child_process'
 
-permitted_users = ["noir_neo"]
+OWNERS = ["noir_neo", "Shell"]
+isFromOwner = (msg) ->
+  return msg.envelope?.user?.name in OWNERS
 
 module.exports = (robot) ->
 
   robot.respond /update/i, (msg) ->
-    if msg.envelope?.user?.name in permitted_users
+    if isFromOwner msg
 
       try
         msg.reply "git pull..."
