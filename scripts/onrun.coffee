@@ -1,3 +1,5 @@
+'use strict'
+
 module.exports = (robot) ->
   cid = setInterval ->
       return if typeof robot?.send isnt 'function'
