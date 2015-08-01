@@ -80,14 +80,11 @@ moment = require('moment')
 
 getEvents = (auth, robot) ->
   moment.locale('ja')
-
-  message = "おはようございます！\n今日の予定は\n"
-
   calendar.events.list {
     auth: auth
-    calendarId: 'primary'
-    timeMin: moment().startOf('day').toDate().toISOString()
-    timeMax: moment().endOf('day').toDate().toISOString()
+    calendarId: 'lqdmu5hgptu5mlbm3jtr56folo@group.calendar.google.com'
+    timeMin: moment().startOf('day').add(1,'day').toDate().toISOString()
+    timeMax: moment().endOf('day').add(1,'day').toDate().toISOString()
     maxResults: 10
     singleEvents: true
     orderBy: 'startTime'
@@ -96,24 +93,16 @@ getEvents = (auth, robot) ->
       console.log 'There was an error contacting the Calendar service: ' + err
       return
     events = response.items
-    if events.length == 0
-      # console.log 'No upcoming events found.'
-      robot.send {room: "#general"}, "#{message}ありません。"
-    else
-      # console.log 'Upcoming 10 events:'
-      i = 0
-      while i < events.length
-        event = events[i]
+    unless events.length == 0
+      message = "こんばんは。お休みの前に明日の予定を確認しましょう。\n明日の予定は"
+      for event in events
         start = event.start.dateTime or event.start.date
-        # setting time?
         if start.indexOf("T") >= 0
           start = start.split("T")[1].split("+")[0]
-          message = "#{message}#{start}に#{event.summary}\n"
+          message = "#{message}\n* #{start} #{event.summary}"
         else
-          message = "#{message}#{event.summary}\n"
-        i++
-      # console.log "#{message}があります。"
-      robot.send {room: "#general"}, "#{message}です。"
+          message = "#{message}\n* #{event.summary}"
+      robot.send {room: "#general"}, "#{message}\n以上になります。\nあまり遅くまで起きていると明日に響きますよ？"
     return
   return
 
@@ -124,12 +113,12 @@ cronJob = require('cron').CronJob;
 module.exports = (robot) ->
   # 朝の
   cronJob = new cronJob(
-    cronTime: "0 0 9 * * 1-5" # 秒 分 時 日 月 週
+    cronTime: "0 55 23 * * *" # 秒 分 時 日 月 週
     start: true # すぐに実行するか
     timeZone: "Asia/Tokyo"
     onTick: ->
       authorize getEvents, robot
     )
   
-  robot.hear /calendar/g, (msg) ->
+  robot.respond /calendar/i, (msg) ->
     authorize getEvents, robot
