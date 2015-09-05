@@ -15,7 +15,7 @@ module.exports = (robot) ->
       "https://sugoi-ninja.slack.com/files/maku693/F06KMN64R/zawa.gif",
     ]
 
-  robot.hear /(おはよ|お早う|オハヨ|ohayo)/i, (msg) ->
+  robot.respond /(おはよ|お早う|オハヨ|ohayo)/i, (msg) ->
     d = new Date
     h = d.getHours()
     text = ""
@@ -27,13 +27,13 @@ module.exports = (robot) ->
     if isFromOwner msg
       msg.reply "おはよう、パパ。"+text
     else
-      msg.send "おはようございます。"+text
+      msg.reply "おはようございます。"+text
 
   robot.hear /(おやすみ|お休み|オヤスミ|oyasumi)/g, (msg) ->
     if isFromOwner msg
       msg.reply "おやすみ、パパ。良い夢を。"
     else
-      msg.send "おやすみなさい。"
+      msg.reply "おやすみなさい。"
 
   robot.hear /はぴば|誕生日おめでとう/g, (msg) ->
     unless isFromOwner msg
