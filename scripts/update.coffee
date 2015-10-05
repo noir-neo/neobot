@@ -1,7 +1,7 @@
 'use strict'
 
 child_process = require 'child_process'
-owners = require './concerns/owners'
+admin = require './concerns/admin'
 
 module.exports = (robot) ->
 
@@ -33,7 +33,7 @@ module.exports = (robot) ->
       msg.reply "git pull failed: " + error
 
   robot.respond /update/i, (msg) ->
-    if owners.isFromOwner msg
+    if admin.isFromAdmin msg
       update(msg)
     else
       msg.reply "エラー、アクセス権限がありません。"
