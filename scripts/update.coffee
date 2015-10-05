@@ -1,10 +1,7 @@
 'use strict'
 
 child_process = require 'child_process'
-
-OWNERS = ["noir_neo"]
-isFromOwner = (msg) ->
-  return msg.envelope?.user?.name in OWNERS
+owners = require './concerns/owners'
 
 module.exports = (robot) ->
 
@@ -36,7 +33,7 @@ module.exports = (robot) ->
       msg.reply "git pull failed: " + error
 
   robot.respond /update/i, (msg) ->
-    if isFromOwner msg
+    if owners.isFromOwner msg
       update(msg)
     else
       msg.reply "エラー、アクセス権限がありません。"
