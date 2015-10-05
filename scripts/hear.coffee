@@ -1,8 +1,6 @@
 'use strict'
 
-OWNERS = ["noir_neo", "Shell"]
-isFromOwner = (msg) ->
-  return msg.envelope?.user?.name in OWNERS
+owners = require './concerns/owners'
 
 module.exports = (robot) ->
   robot.hear /(会議|打ち?合わ?せ)(始|はじ)/g, (msg) ->
@@ -24,19 +22,19 @@ module.exports = (robot) ->
       when 5,6,7,8,9 then text = "良い一日を。 :coffee:"
       when 10,11,12,13,14,15,16,17 then text = "もう"+h+"時よ？"
       when 18,19,20,21,22,23,24,0,1,2 then text = "今は"+h+"時ですよ。一体どんな生活をしているのですか。"
-    if isFromOwner msg
+    if owners.isFromOwner msg
       msg.reply "おはよう、パパ。"+text
     else
       msg.reply "おはようございます。"+text
 
   robot.hear /(おやすみ|お休み|オヤスミ|oyasumi)/g, (msg) ->
-    if isFromOwner msg
+    if owners.isFromOwner msg
       msg.reply "おやすみ、パパ。良い夢を。"
     else
       msg.reply "おやすみなさい。"
 
   robot.hear /はぴば|誕生日おめでとう/g, (msg) ->
-    unless isFromOwner msg
+    unless owners.isFromOwner msg
       return
     d = new Date
     month = d.getMonth() + 1
