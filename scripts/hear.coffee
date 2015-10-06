@@ -1,6 +1,7 @@
 'use strict'
 
 admin = require './concerns/admin'
+reaction = require './concerns/reaction'
 
 module.exports = (robot) ->
   robot.hear /(会議|打ち?合わ?せ)(始|はじ)/g, (msg) ->
@@ -67,3 +68,6 @@ module.exports = (robot) ->
           sing ++i
         , wait_time
       sing 0
+
+  robot.hear /(ok|お(k|ｋ)|オーケー|おーけー)/i, (msg) ->
+    reaction.add msg, "ok_woman"
